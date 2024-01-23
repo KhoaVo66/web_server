@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const userExists = await UserModel.findOne({ email });
     //check if user exists
     if (userExists) {
-      res.status(401)
+      res.status(201)
       res.json({message: "Email đã tồn tại!!"})
     }
     //hash password
