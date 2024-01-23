@@ -17,33 +17,31 @@ const registerUser = asyncHandler(async (req, res) => {
     if (userExists) {
       res.status(201)
       res.json({message: "Email đã tồn tại!!"})
-    }
-
-    if (userExists === false) {
-          //hash password
+    }else {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
   
       //create user in DB
-      UserModel.create({
+      const user = UserModel.create({
         firstName,
         lastName,
         email,
         address: "",
         password: hashedPassword,
       });
+      
+      // created successfully
+      if (user) {
+        res.status(200);
+        res.json({
+          message: "dang ky thanh cong",
+        });
+      } else {
+        res.status(400);
+        throw new Error("user da ton tai");
+      }
     }
 
-    // created successfully
-    // if (user) {
-    //   res.status(200);
-    //   res.json({
-    //     message: "dang ky thanh cong",
-    //   });
-    // } else {
-    //   res.status(400);
-    //   throw new Error("user da ton tai");
-    // }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
