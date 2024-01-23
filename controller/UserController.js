@@ -15,8 +15,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const userExists = await UserModel.findOne({ email });
     //check if user exists
     if (userExists) {
-      res.status(401);
-      throw new Error("email da ton tai");
+      res.status(401)
+      res.json({message: "Email đã tồn tại!!"})
     }
     //hash password
     const salt = await bcrypt.genSalt(10);
