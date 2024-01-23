@@ -85,8 +85,8 @@ app.delete('/products/delete/:id', (req, res) => {
 //create feedback
 app.post('/Createfeedback', feedbackController.CreateFeedback)
 //getFeedback
-// app.get('/feedback', (req, res) => {
-//     FeedbackModel.find()
-//     .then(feedback => res.json(feedback))
-//     .catch(err => console.log(err))
-// })
+app.get('/feedback', (req, res) => {
+    FeedbackModel.find()
+    .then(feedback => res.json(feedback))
+    .catch(err => console.log(err))
+})
