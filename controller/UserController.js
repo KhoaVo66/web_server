@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const userExists = await UserModel.findOne({ email });
     //check if user exists
     if (userExists) {
-      res.status(400);
+      res.status(401);
       throw new Error("email da ton tai");
     }
     //hash password
@@ -28,7 +28,6 @@ const registerUser = asyncHandler(async (req, res) => {
       lastName,
       email,
       address: "",
-      avatar: "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
       password: hashedPassword,
     });
 
